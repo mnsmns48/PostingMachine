@@ -10,6 +10,7 @@ class PostingMachineBase(DeclarativeBase):
 class PreModData(PostingMachineBase):
     __tablename__ = 'premoderate'
     date: Mapped[DateTime] = mapped_column(DateTime(timezone=False), server_default=func.now())
+    url: Mapped[str]
     source: Mapped[str]
     internal_id: Mapped[int] = mapped_column(BIGINT, primary_key=True)
     source_id: Mapped[int | None] = mapped_column(BIGINT)
@@ -23,4 +24,3 @@ class PreModData(PostingMachineBase):
     repost_source_title: Mapped[str | None]
     attachments_info: Mapped[str | None]
     attachments: Mapped[dict | None] = mapped_column(type_=JSON)
-    url: Mapped[str]
