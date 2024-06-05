@@ -60,14 +60,15 @@ async def sync_db(engine: DataBase, settings: DBSettings, basemodel: Type[Postin
         async with engine.engine.begin() as async_connect:
             await async_connect.run_sync(basemodel.metadata.create_all)
     except InvalidCatalogNameError:
-        conn = await asyncpg.connect(database='postgres',
-                                     user=settings.username,
-                                     password=settings.password.get_secret_value(),
-                                     host=settings.host,
-                                     port=settings.port
-                                     )
-        sql = f'CREATE DATABASE "{settings.database}"'
-        await conn.execute(sql)
+        conn = await asyncpg.connect(
+            database='postgres',
+            user=settings.username,
+            password=settings.password.get_secret_value(),
+            host=settings.host,
+            port=settings.port
+        )
+        sql_query = f'CREATE DATABASE "{settings.database}"'
+        await conn.execute(sql_query)
         await conn.close()
         print(f"DB <{settings.database}> success created")
         async with engine.engine.begin() as async_connect:
