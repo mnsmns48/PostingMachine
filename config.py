@@ -29,5 +29,3 @@ class MainSettings(BaseSettings, case_sensitive=True):
 
 
 main_settings = MainSettings()
-
-print(main_settings)

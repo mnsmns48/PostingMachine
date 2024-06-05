@@ -1,4 +1,4 @@
 /venv/
 /setup/db.env
 /setup/settings.env
-/setup/sources.env
+/setup/sources.txt
