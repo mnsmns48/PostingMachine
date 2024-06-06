@@ -2,3 +2,4 @@
 /setup/db.env
 /setup/settings.env
 /setup/sources.txt
+/setup/block_words.txt
