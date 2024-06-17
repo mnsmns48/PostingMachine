@@ -4,7 +4,7 @@ import aiohttp
 
 from crud import write_data
 from engine import db_engine, sync_db
-from func import read_sources, get_wall, check_data, scrape_vk_data, alert_editor, send_notification
+from func import read_sources, get_wall, check_data, scrape_vk_data, send_notification
 from models import PreModData, PostingMachineBase
 
 
