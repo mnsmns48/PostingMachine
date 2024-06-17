@@ -11,7 +11,7 @@ class PostingMachineBase(DeclarativeBase):
 
 class PreModData(PostingMachineBase):
     __tablename__ = 'premoderate'
-    date: Mapped[DateTime] = mapped_column(DateTime(timezone=False), server_default=func.now())
+    date: Mapped[DateTime] = mapped_column(DateTime(timezone=False))
     url: Mapped[str]
     source: Mapped[str]
     internal_id: Mapped[int] = mapped_column(BIGINT, primary_key=True)
@@ -44,3 +44,12 @@ class Posts(PostingMachineBase):
     repost_source_name: Mapped[str | None]
     attachments: Mapped[str | None]
     source: Mapped[str | None]
+
+
+class BadPosts(PostingMachineBase):
+    __tablename__ = 'badposts'
+    date: Mapped[DateTime] = mapped_column(DateTime(timezone=False))
+    url: Mapped[str]
+    source: Mapped[str]
+    internal_id: Mapped[int] = mapped_column(BIGINT, primary_key=True)
+    source_id: Mapped[int] = mapped_column(BIGINT, primary_key=True)

@@ -2,6 +2,7 @@ import os
 from datetime import date
 from pathlib import Path
 
+from aiogram import Bot
 from pydantic import SecretStr, BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -33,3 +34,4 @@ class MainSettings(BaseSettings):
 
 
 source_settings = MainSettings()
+bot = Bot(token=source_settings.bot_token.get_secret_value())
