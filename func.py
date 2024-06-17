@@ -9,7 +9,6 @@ import aiohttp
 from aiohttp import ClientSession
 from sqlalchemy import select, and_, Result
 
-import engine
 from config import root_path, source_settings, bot
 from engine import db_engine
 from models import Posts, PreModData, BadPosts
@@ -261,14 +260,14 @@ async def scrape_vk_data(data: dict, session: ClientSession, **kwargs) -> dict:
     return result
 
 
-async def send_notification(session: ClientSession, **kwargs):
+async def send_notification(session: ClientSession, text: str):
     async with session.get(
             url=f"https://api.telegram.org/bot{source_settings.bot_token.get_secret_value()}"
                 f"/sendMessage?chat_id={source_settings.post_editor}"
-                f"&text=Работает"
-                f"&disable_notification={source_settings.disable_notification}") as resp:
+                f"&text=Обновлено:{text}"
+    ) as resp:  # f"&disable_notification={source_settings.disable_notification}"
         await resp.json()
 
 
 async def alert_editor(source: str):
-    await bot.send_message(chat_id=source_settings.post_editor, text=f'Новое событие {source}')
+    await bot.send_message(chat_id=source_settings.post_editor, text=f'Обновлено:\n\n{source}')

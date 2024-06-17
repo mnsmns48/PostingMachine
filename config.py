@@ -2,7 +2,6 @@ import os
 from datetime import date
 from pathlib import Path
 
-from aiogram import Bot
 from pydantic import SecretStr, BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
