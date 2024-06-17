@@ -9,7 +9,7 @@ import aiohttp
 from aiohttp import ClientSession
 from sqlalchemy import select, and_, Result
 
-from config import root_path, source_settings, bot
+from config import root_path, source_settings
 from engine import db_engine
 from models import Posts, PreModData, BadPosts
 
@@ -269,5 +269,5 @@ async def send_notification(session: ClientSession, text: str):
         await resp.json()
 
 
-async def alert_editor(source: str):
-    await bot.send_message(chat_id=source_settings.post_editor, text=f'Обновлено:\n\n{source}')
+# async def alert_editor(source: str):
+#     await bot.send_message(chat_id=source_settings.post_editor, text=f'Обновлено:\n\n{source}')

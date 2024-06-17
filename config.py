@@ -33,4 +33,3 @@ class MainSettings(BaseSettings):
 
 
 source_settings = MainSettings()
-bot = Bot(token=source_settings.bot_token.get_secret_value())
