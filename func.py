@@ -34,6 +34,7 @@ async def read_sources(file: str) -> dict:
                                            }) as resp:
                     if resp.status == 200:
                         r = await resp.json()
+                        await asyncio.sleep(1)
                         _id = {
                             '_id': r.get('response').get('object_id'),
                             '_type': r.get('response').get('type'),
