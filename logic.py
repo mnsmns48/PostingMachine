@@ -40,4 +40,4 @@ async def cyclic_observation(sources: str):
                         if notificator:
                             await send_notification(session=aio_session, text=notificator)
                             notificator = ''
-        await asyncio.sleep(120)
+        await asyncio.sleep(30)
