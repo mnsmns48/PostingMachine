@@ -257,12 +257,11 @@ async def scrape_vk_data(data: dict, session: ClientSession, **kwargs) -> dict:
             'attachments_info': await attache_info(attache=attachments)
         }
     )
-    # print(result['source_title'], result['internal_id'], result['url'])
     return result
 
 
 async def send_notification(session: ClientSession, text: str):
-    for admin in source_settings.telegram_admin_id[:1]:
+    for admin in source_settings.telegram_admin_id[1:]:
         async with session.get(
                 url=f"https://api.telegram.org/bot{source_settings.bot_token.get_secret_value()}"
                     f"/sendMessage?chat_id={admin}"
@@ -271,6 +270,3 @@ async def send_notification(session: ClientSession, text: str):
             await resp.json()
         # await asyncio.sleep(0.1)
 
-
-# async def alert_editor(source: str):
-#     await bot.send_message(chat_id=source_settings.post_editor, text=f'Обновлено:\n\n{source}')
