@@ -262,14 +262,14 @@ async def scrape_vk_data(data: dict, session: ClientSession, **kwargs) -> dict:
 
 
 async def send_notification(session: ClientSession, text: str):
-    for admin in source_settings.telegram_admin_id:
+    for admin in source_settings.telegram_admin_id[:1]:
         async with session.get(
                 url=f"https://api.telegram.org/bot{source_settings.bot_token.get_secret_value()}"
                     f"/sendMessage?chat_id={admin}"
-                    f"&text=Обновлено:{text}"
+                    f"&text=Женечка❤️ :{text}"
         ) as resp:  # f"&disable_notification={source_settings.disable_notification}"
             await resp.json()
-        await asyncio.sleep(0.1)
+        # await asyncio.sleep(0.1)
 
 
 # async def alert_editor(source: str):

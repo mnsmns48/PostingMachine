@@ -23,7 +23,6 @@ async def cyclic_observation(sources: str):
                         async with db_engine.scoped_session() as db_session:
                             for post in data:
                                 repost = True if post.get('copy_history') else False
-                                # text = post.get('copy_history')[0].get('text').strip() if repost else post.get('text')
                                 check = await check_data(
                                     post_id=post.get('id'),
                                     source_id=post.get('owner_id'))
@@ -40,4 +39,4 @@ async def cyclic_observation(sources: str):
                         if notificator:
                             await send_notification(session=aio_session, text=notificator)
                             notificator = ''
-        await asyncio.sleep(30)
+        await asyncio.sleep(20)
