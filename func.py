@@ -3,6 +3,7 @@ import json
 import re
 from collections import Counter
 from datetime import datetime
+import random
 from typing import Any
 
 import aiohttp
@@ -227,6 +228,7 @@ async def attache_info(attache: json) -> str | None:
         data = json.loads(attache)
         for k, v in data.items():
             result += f"{k}:{len(v)} "
+        await asyncio.sleep(0.1)
         return result.strip()
     return None
 
@@ -261,12 +263,20 @@ async def scrape_vk_data(data: dict, session: ClientSession, **kwargs) -> dict:
 
 
 async def send_notification(session: ClientSession, text: str):
-    for admin in source_settings.telegram_admin_id[1:]:
+    for admin in source_settings.telegram_admin_id[:1]:
         async with session.get(
                 url=f"https://api.telegram.org/bot{source_settings.bot_token.get_secret_value()}"
                     f"/sendMessage?chat_id={admin}"
-                    f"&text=Женечка❤️ :{text}"
+                    f"&text={await read_and_choose_random_line()} Женечка❤️ :{text}"
         ) as resp:  # f"&disable_notification={source_settings.disable_notification}"
             await resp.json()
         # await asyncio.sleep(0.1)
 
+
+async def read_and_choose_random_line():
+    with open('compliment.txt', 'r') as file:
+        lines = file.readlines()
+        if lines:
+            return random.choice(lines)
+        else:
+            return None
