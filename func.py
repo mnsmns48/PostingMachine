@@ -263,7 +263,7 @@ async def scrape_vk_data(data: dict, session: ClientSession, **kwargs) -> dict:
 
 
 async def send_notification(session: ClientSession, text: str):
-    for admin in source_settings.telegram_admin_id[:1]:
+    for admin in source_settings.telegram_admin_id[1:]:
         async with session.get(
                 url=f"https://api.telegram.org/bot{source_settings.bot_token.get_secret_value()}"
                     f"/sendMessage?chat_id={admin}"
