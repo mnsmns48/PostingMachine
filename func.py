@@ -120,7 +120,7 @@ async def de_anonymization(data: dict, is_repost: bool, phone_number: int | None
                 item, count = max(counter.items(), key=lambda p: p[::-1])
                 if item:
                     return int(item)
-            except ValueError:
+            except (ValueError, TypeError):
                 if len(response) == 0:
                     return None
     return signer_id
