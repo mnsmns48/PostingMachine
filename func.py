@@ -267,15 +267,14 @@ async def send_notification(session: ClientSession, text: str):
         async with session.get(
                 url=f"https://api.telegram.org/bot{source_settings.bot_token.get_secret_value()}"
                     f"/sendMessage?chat_id={admin}"
-                    f"&text={await read_and_choose_random_line()} Женечка❤️ :{text}"
+                    f"&text=------ источник: {text}"
         ) as resp:  # f"&disable_notification={source_settings.disable_notification}"
             await resp.json()
 
 
-async def read_and_choose_random_line():
-    with open('compliment.txt', 'r') as file:
-        lines = file.readlines()
-        if lines:
-            return random.choice(lines)
-        else:
-            return None
+# async def read_and_choose_random_line():
+#     with open('compliment.txt', 'r') as file:
+#         lines = file.readlines()
+#         if lines:
+#             return random.choice(lines)
+#         return
